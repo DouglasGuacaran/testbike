@@ -3,17 +3,31 @@
 {% block title %}Home{% endblock title %}
 {% block stylecss %}<link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock stylecss %}
 {% block body %}
-    <div class="container">
-        <h1>HOLA</h1>
-        <div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae quia et architecto ducimus cumque, nemo esse quae doloremque quis ullam at aliquam vero non facere sunt iure culpa! Magni incidunt dolorum, pariatur perferendis, veniam doloribus non placeat nihil facilis, perspiciatis possimus ullam quasi. Labore sapiente error fuga quis et facilis perspiciatis veritatis voluptas distinctio porro modi, voluptatibus adipisci earum nulla voluptate accusantium similique facere dolores optio laboriosam architecto rerum. Officiis hic in tempore ab voluptatem nesciunt impedit fuga optio? Nulla quas fuga cum ipsa eaque? Perferendis eos molestias sunt hic! Obcaecati quos dignissimos nisi similique fuga aperiam ad perferendis dolorum eligendi nam unde distinctio consequuntur voluptas hic, quidem ipsa ullam laboriosam velit enim optio eaque. Incidunt, molestias repudiandae! Quisquam sint consequuntur provident ducimus nobis, magni illo, neque fugit minima in molestias architecto eius iusto voluptate incidunt? Vero delectus numquam laboriosam nostrum perspiciatis dolor quae illum, dolores excepturi odio laborum?.</p>
-        </div>
-        <div>Listado de tiendas de Bici</div>
-        <div>
+    <div class="container-fluid">
+        <div class="container">
+            <h1>
+                Estaciones de {{response.network.name}} 
+            </h1> 
             {% for i in response.network.stations %}
-            {{i.name}}
+            <card class="card">
+                <p>
+                    Estación = {{i.name}}
+                </p>
+                <p>
+                    Capacidad Total de Bicicletas= {{i.extra.slots}}
+                </p>
+                <p>
+                    Bicicletas usadas = {{i.empty_slots}}
+                </p>
+                <p>
+                    Dirección = {{i.extra.address}}
+                </p>
+                <p> Latitud = {{i.latitude}}  Longitud = {{i.longitude}}</p>
+
+            </card>
             {% endfor %}
-            {{status}}
+        </div>
+        <div>
         </div>
             
     </div>

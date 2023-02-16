@@ -3,7 +3,10 @@ import requests
 
 # Create your views here.
 def home(request):
+    
     response = requests.get('http://api.citybik.es/v2/networks/bikesantiago')
-    responses = response.json()
-    status= response.status_code
-    return render(request,'home.html',{'response':responses,'status':status})
+    if response.status_code == 200:
+        response_json = response.json()
+        
+    return render(request,'home.html',{'response':response_json})
+
