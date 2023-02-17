@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import BikeSantiago
+from bs4 import BeautifulSoup
 import requests
 
 def home(request):
@@ -26,3 +27,23 @@ def home(request):
     return render(request,'home.html',{"all_data":all_data})
 
 
+def tarea2(request):
+    soup = BeautifulSoup(requests.get("https://seia.sea.gob.cl/busqueda/buscarProyectoAction.php").text, "html.parser")
+    table = soup.find('table')
+    data_json = {}
+    header = []
+    rows = []
+    for i, row in enumerate(table.find_all('tr')):
+        if i == 0:
+            header = [el.text.strip() for el in row.find_all('th')]
+        else:
+            rows.append([el.text.strip() for el in row.find_all('td')])
+    print(header)
+   
+    for row in rows:
+        print(row)
+    print(data_json+'JOOO')
+    
+                
+    return render(request,'tarea2.html',)
+        
