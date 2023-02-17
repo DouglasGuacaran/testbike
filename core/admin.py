@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BikeSantiago
+from .models import Estacion
 
-admin.site.register(BikeSantiago)
+admin.site.register(Estacion)
 # Register your models here.

@@ -4,38 +4,59 @@
 {% block stylecss %}<link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock stylecss %}
 {% block body %}
     <div class="container-fluid">
-        <h1>
-            Estaciones de BikeSantiago
-        </h1> 
         <div class="container">
-            {% for i in all_data %}
-            <div class="card">
-                <div class="card-title">
-                    Información de la estación
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        Estación = {{i.name_station}}
-                    </div>
-                    <div class="card-text">
-                        Bicicletas disponibles= {{i.free_bikes}}
-                    </div>
-                    <div class="card-text">
-                        Dirección = {{i.address}}
-                    </div>
-                    <div class="card-text"> 
-                        Latitud = {{i.latitude}}
-                    </div>
-                    <div class="card-text">
-                        Longitud = {{i.longitude}}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+            <h1>
+                Test como Back-End Developer Douglas Guacarán
+            </h1> 
+            <h4>Tarea 1</h4>
+            <span>
+                Dada la siguiente API pública http://api.citybik.es/v2/networks/bikesantiago (Bike Santiago)
+desarrolle los siguiente requerimientos:
+            </span>
+            <ul>
+                <li>
+                    Crear una función que obtenga la información presentada en la API pública (librerías a utilizar: requests, urllib3 o aiohttp).
+                </li>
+                <li>
+                    Crear un modelo para la información obtenida.
+                </li>
+                <li>
+                    Guardar en el modelo la información obtenida desde el API.
+                </li>
+                <li>
+                    Opcional. Generar vista en el administrador para visualizar la información obtenida.
+                </li>
+                <li>
+                    Opcional. Generar una vista con la información en Bootstrap 5 u otro similar.
+                </li>
+            </ul>
+            <br>
+            <h4>Tarea 2</h4>
+            <span>
+                Dada la siguiente url https://seia.sea.gob.cl/busqueda/buscarProyectoAction.php (Servicio
+de Evaluación Ambiental) desarrolle los siguiente requerimientos:
+            </span>
+            <ul>
+                <li>
+                    Crear un script para obtener la información presentada en la tabla de la url proporcionada (librerías a utilizar: BeautifulSoup o Selenium).
+                </li>
+                <li>
+                    El script deberá recorrer todas la página y obtener la información de la tabla.
+                </li>
+                <li>
+                    El script deberá crear un archivo .json con la información obtenida.
+                </li>
+                <li>
+                    Generar modelo para guardar la información obtenida.
+                </li>
+                <li>
+                    Opcional. Generar vista en el administrador para visualizar la información obtenida.
+                </li>
+                <li>
+                    Opcional. Generar una vista con la información en Bootstrap 5 u otro similar.
+                </li>
+            </ul>
         </div>
-        <div>
-        </div>
-            
     </div>
 {% endblock body %}
 

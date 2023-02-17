@@ -3,19 +3,6 @@
     padding: 0;
 }
 
-.container{
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-}
-
 .container h1 {
     padding: 20px;
-}
-
-.card {
-    width: auto;
-    font-size:16px;
-    padding: 20px;
-    margin: 5px;
 }

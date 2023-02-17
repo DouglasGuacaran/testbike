@@ -1,4 +1,5 @@
 import requests
+import json
 from bs4 import BeautifulSoup
 
     
@@ -12,8 +13,13 @@ for i, row in enumerate(table.find_all('tr')):
         header = [el.text.strip() for el in row.find_all('th')]
     else:
         rows.append([el.text.strip() for el in row.find_all('td')])
-print(header)
- 
-for row in rows:
-    print(row)
+
+data_json = { 'header': header, 'rows': rows}
+with open("data.json", "w") as f:
+    json.dump(data_json, f)
+with open('data.json') as f:
+    data = json.load(f)
+print(data)
+# for row in rows:
+    # print(row)
 

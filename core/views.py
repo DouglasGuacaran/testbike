@@ -1,30 +1,46 @@
 from django.shortcuts import render
-from .models import BikeSantiago
+from .models import Estacion
+from datetime import datetime
 from bs4 import BeautifulSoup
 import requests
 
 def home(request):
-    datos = BikeSantiago.objects.values()
-    if datos == 0:
-        url = 'http://api.citybik.es/v2/networks/bikesantiago'
-        response = requests.get(url)
-        data = response.json()
-        
-        for i in data['network']['stations']:
-            datos_bikesantiago = BikeSantiago(
-                id_station = i['id'],
-                name_station = i['name'],
-                free_bikes = i['free_bikes'],
-                address = i['extra']['address'],
-                latitude = i['latitude'],
-                longitude = i['longitude']
-            )
-        
-            datos_bikesantiago.save()
-            all_data = BikeSantiago.objects.all().order_by('-id')
-    else:
-        all_data = BikeSantiago.objects.all().order_by('latitude')
-    return render(request,'home.html',{"all_data":all_data})
+    
+    return render(request,'home.html')
+
+def bike_list(request):
+    estaciones = Estacion.objects.all()   
+    return render(request,'bike_list.html',{'estaciones':estaciones})
+
+
+def actualizar_estaciones(request):
+    # Hacer una solicitud a la API y obtener los datos
+    response = requests.get('http://api.citybik.es/v2/networks/bikesantiago')
+    data = response.json()
+
+    # Procesar los datos y actualizar los registros en la base de datos
+    estaciones = data['network']['stations']
+    for estacion in estaciones:
+        # Comprobar si la estación ya existe en la base de datos
+        try:
+            obj = Estacion.objects.get(id=estacion['id'])
+        except Estacion.DoesNotExist:
+            obj = Estacion(id=estacion['id'])
+
+        # Actualizar los campos de la estación
+        obj.nombre = estacion['name']
+        obj.latitud = estacion['latitude']
+        obj.longitud = estacion['longitude']
+        obj.bicicletas_disponibles = estacion['free_bikes']
+        obj.espacios_disponibles = estacion['empty_slots']
+        obj.ultima_actualizacion = datetime.fromtimestamp(int(data['network']['stations']['extra']['last_updated']))
+
+        # Guardar la estación en la base de datos
+        obj.save()
+
+    # Redirigir a una página de confirmación de actualización
+    return render(request, 'bike_list.html')
+
 
 
 def tarea2(request):
