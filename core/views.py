@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Estacion
 from datetime import datetime
 from bs4 import BeautifulSoup
+from dateutil import parser
 import requests
 
 def home(request):
@@ -33,13 +34,13 @@ def actualizar_estaciones(request):
         obj.longitud = estacion['longitude']
         obj.bicicletas_disponibles = estacion['free_bikes']
         obj.espacios_disponibles = estacion['empty_slots']
-        obj.ultima_actualizacion = datetime.fromtimestamp(int(data['network']['stations']['extra']['last_updated']))
+        obj.ultima_actualizacion = parser.parse(estacion['timestamp'])
 
         # Guardar la estación en la base de datos
         obj.save()
-
+    estaciones=Estacion.objects.all()
     # Redirigir a una página de confirmación de actualización
-    return render(request, 'bike_list.html')
+    return render(request, 'actualizar_estaciones.html',{'estaciones':estaciones})
 
 
 

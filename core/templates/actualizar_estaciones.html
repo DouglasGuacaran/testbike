@@ -1,0 +1,44 @@
+{% extends './base.html' %}
+{% load static %}
+{% block stylecss %}<link rel="stylesheet" href="{% static 'css/bike_list.css'%}">{% endblock stylecss %}
+{% block body %}
+<a href="{% url 'actualizar_estaciones' %}">
+    <button class="btn btn-primary">Actualizar estaciones</button>
+</a>
+
+    <table class="table">
+        <thead class="table-primary">
+            <tr>
+                <th>Nombre</th>
+                <th>latitud</th>
+                <th>longitud</th>
+                <th>Bicicletas Disponibles</th>
+                <th>Espacios Disponibles</th>
+                <th>Ultima Actualizacion</th>
+            </tr>
+        </thead>
+        {% if estaciones %}
+        <tbody>
+            {% for estacion in estaciones %}
+            <tr>
+                <td>{{estacion.nombre}}</td>
+                <td>{{estacion.latitud}}</td>
+                <td>{{estacion.longitud}}</td>
+                <td>{{estacion.bicicletas_disponibles}}</td>
+                <td>{{estacion.espacios_disponibles}}</td>
+                <td>{{estacion.ultima_actualizacion}}</td>
+            </tr>
+            {% endfor %}
+
+            {% else %}
+            <h1> No existen registros</h1>
+
+            {% endif %}
+        </tbody>
+
+    </table>
+
+{% endblock body %}
+
+
+
