@@ -4,27 +4,33 @@
 {% block stylecss %}<link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock stylecss %}
 {% block body %}
     <div class="container-fluid">
+        <h1>
+            Estaciones de BikeSantiago
+        </h1> 
         <div class="container">
-            <h1>
-                Estaciones de {{response.network.name}} 
-            </h1> 
-            {% for i in response.network.stations %}
-            <card class="card">
-                <p>
-                    Estación = {{i.name}}
-                </p>
-                <p>
-                    Capacidad Total de Bicicletas= {{i.extra.slots}}
-                </p>
-                <p>
-                    Bicicletas usadas = {{i.empty_slots}}
-                </p>
-                <p>
-                    Dirección = {{i.extra.address}}
-                </p>
-                <p> Latitud = {{i.latitude}}  Longitud = {{i.longitude}}</p>
-
-            </card>
+            {% for i in all_data %}
+            <div class="card">
+                <div class="card-title">
+                    Información de la estación
+                </div>
+                <div class="card-body">
+                    <div class="card-text">
+                        Estación = {{i.name_station}}
+                    </div>
+                    <div class="card-text">
+                        Bicicletas disponibles= {{i.free_bikes}}
+                    </div>
+                    <div class="card-text">
+                        Dirección = {{i.address}}
+                    </div>
+                    <div class="card-text"> 
+                        Latitud = {{i.latitude}}
+                    </div>
+                    <div class="card-text">
+                        Longitud = {{i.longitude}}
+                    </div>
+                </div>
+            </div>
             {% endfor %}
         </div>
         <div>

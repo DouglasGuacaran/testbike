@@ -1,11 +1,10 @@
 from django.db import models
-
 # Create your models here.
 class BikeSantiago(models.Model):
     
-    name_station=models.CharField(max_length=200, unique=True)
-    total_attendance = models.IntegerField(blank=True, null=True)
-    empty_slots = models.IntegerField(blank=True, null=True)
+    id_station = models.CharField(max_length=200, unique=True)
+    name_station = models.CharField(max_length=200, null=True)
+    free_bikes = models.CharField(max_length=200, null=True)
     address = models.CharField(max_length=200,blank=True, null=True)
     latitude = models.CharField(max_length=200,blank=True, null=True)
     longitude = models.CharField(max_length=200,blank=True, null=True)

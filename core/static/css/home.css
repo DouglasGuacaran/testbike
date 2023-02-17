@@ -3,24 +3,13 @@
     padding: 0;
 }
 
-body {	
-    height: 520px;
-}
-
-img {
-    width: 100%;
-}
-
 .container{
-    display: flex;
-    flex-direction: column;
-    justify-content:center;
-    align-items: center;
-    flex-wrap: wrap;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
 }
 
 .container h1 {
-
     padding: 20px;
 }
 
