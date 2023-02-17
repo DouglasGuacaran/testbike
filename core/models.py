@@ -14,3 +14,14 @@ class Estacion(models.Model):
     
 
 # class 
+class Project(models.Model):
+    No = models.IntegerField()
+    Nombre = models.CharField(max_length=255)
+    Tipo = models.CharField(max_length=10)
+    Región = models.CharField(max_length=20)
+    Tipología = models.CharField(max_length=5)
+    Titular = models.CharField(max_length=255)
+    Inversión = models.DecimalField(max_digits=10, decimal_places=4)
+    FechaPresentaciónFecha = models.DateField()
+    Estado = models.CharField(max_length=30)
+    Mapa = models.CharField(max_length=255)
