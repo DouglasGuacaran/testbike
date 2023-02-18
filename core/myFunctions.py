@@ -32,9 +32,12 @@ def getConnection(url):
     # Redirigir a una página de confirmación de actualización
     return
 
-def obtenerData(url):
+def obtenerData():
     # Scrap data from page
-    soup = BeautifulSoup(requests.get(url).text, "html.parser")
+    
+    soup = BeautifulSoup(requests.get('https://seia.sea.gob.cl/busqueda/buscarProyectoAction.php').text, "html.parser")
+    index = soup.select_one('select')
+    
     table = soup.find('table')
     scrap = enumerate(table.find_all('tr'))
 
@@ -58,5 +61,6 @@ def obtenerData(url):
 
     return (project_list)
 # write file
-with open("data.json", "w", encoding='utf8') as final:
-    json.dump(obtenerData("https://seia.sea.gob.cl/busqueda/buscarProyectoAction.php"), final, ensure_ascii=False)
+# with open("data.json", "w", encoding='utf8') as final:
+#     json.dump(obtenerData("https://seia.sea.gob.cl/busqueda/buscarProyectoAction.php"), final, ensure_ascii=False)
+    

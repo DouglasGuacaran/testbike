@@ -2,24 +2,36 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
-    
-soup = BeautifulSoup(requests.get("https://seia.sea.gob.cl/busqueda/buscarProyectoAction.php").text, "html.parser")
+url='https://seia.sea.gob.cl/busqueda/buscarProyectoAction.php'
+soup = BeautifulSoup(requests.get(url).text, "html.parser")
+select = soup.select_one("select")
+select_element = soup.find('select')
+last_option = select_element.find_all('option')[-1].text
+print(last_option)
+
 table = soup.find('table')
-data_json = {}
+scrap = enumerate(table.find_all('tr'))
+
 header = []
-rows = []
-for i, row in enumerate(table.find_all('tr')):
+project_list = []
+
+for i, row in scrap:
     if i == 0:
+        # parse header
         header = [el.text.strip() for el in row.find_all('th')]
     else:
-        rows.append([el.text.strip() for el in row.find_all('td')])
+        # parse n row
+        extracted_row = [el.text.strip() for el in row.find_all('td')]
+        # ensure row has same len than table header
+        if len(header) == len(extracted_row):
+            # build row dict
+            dict_row = {}
+            for j, header_key in enumerate(header):
+                dict_row.update({header_key: extracted_row[j]})
+            project_list.append(dict_row)
 
-data_json = { 'header': header, 'rows': rows}
-with open("data.json", "w") as f:
-    json.dump(data_json, f)
-with open('data.json') as f:
-    data = json.load(f)
-print(data)
-# for row in rows:
-    # print(row)
+print (project_list)
+# write file
+# with open("data.json", "w", encoding='utf8') as final:
+#     json.dump(obtenerData("https://seia.sea.gob.cl/busqueda/buscarProyectoAction.php"), final, ensure_ascii=False)
 

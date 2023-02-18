@@ -6,20 +6,18 @@
 {% block body %}
     <div class="container-fluid">
         <div class="container">
-            <h1>Título</h1>                    
-            <h3>{{algo}}</h3>
-            {{ resultado }}
-
-            <form action = "" method = "get">
-                <label for="your_name">Número de Tabla</label>
-                <input id="your_name" type="number" name="your_name" min="1" max="255" value="{{ current_value }}">
-                <input type="submit" value="OK">
-            </form>
+            <h1>{{my_var}}</h1>
+                <input type="number" id="mi_input" name="pagina" min="1" max="2844">
+            <h3>Título</h3>                    
+                    <label for="proyectos"> Numero de proyecto</label>
+                </div>
+            </div>
         </div>
     </div>
-
-        </div>
-    </div>
+    <a href="{% url 'actualizar_proyectos' %}">
+        <button class="btn btn-primary">Actualizar Proyectos</button>
+    </a>
+    
     <table class="table">
         <thead class="table-primary">
             <tr>
