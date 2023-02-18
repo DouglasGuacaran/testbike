@@ -25,6 +25,7 @@ Instalación
     -Clonar el repositorio del proyecto o descargarlo en formato zip https://github.com/DouglasGuacaran/testbike.git.
     -Crear un entorno virtual y activarlo.
     -Instalar las dependencias del proyecto usando el archivo requirements.txt.
+    -Sera necesario crear en la carpeta testbike un archivo .env que contenga los valores de SECRET_KEY=, PASSWORD= y DEBUB=
     - Configurar las variables de entorno necesarias (p. ej. credenciales de base de datos).
     - Realizar las migraciones de la base de datos.
     - Crear un superusuario para acceder al panel de administración (opcional).
