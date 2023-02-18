@@ -33,7 +33,7 @@ def getConnection(url):
     return
 
 def obtenerData():
-    # Scrap data from page
+    # Scrappin datos de la pagina
     
     soup = BeautifulSoup(requests.get('https://seia.sea.gob.cl/busqueda/buscarProyectoAction.php').text, "html.parser")
     index = soup.select_one('select')
@@ -46,21 +46,21 @@ def obtenerData():
 
     for i, row in scrap:
         if i == 0:
-            # parse header
+            # obtencion del header
             header = [el.text.strip() for el in row.find_all('th')]
         else:
-            # parse n row
+            # 
             extracted_row = [el.text.strip() for el in row.find_all('td')]
-            # ensure row has same len than table header
+            # asegurando que la fila tenga la misma longitud que el encabezado de la tabla
             if len(header) == len(extracted_row):
-                # build row dict
+                # construyendo el dict
                 dict_row = {}
                 for j, header_key in enumerate(header):
                     dict_row.update({header_key: extracted_row[j]})
                 project_list.append(dict_row)
 
     return (project_list)
-# write file
-# with open("data.json", "w", encoding='utf8') as final:
-#     json.dump(obtenerData("https://seia.sea.gob.cl/busqueda/buscarProyectoAction.php"), final, ensure_ascii=False)
+# imprimir archivo
+with open("data.json", "w", encoding='utf8') as final:
+    json.dump(obtenerData(), final, ensure_ascii=False)
     

@@ -28,9 +28,7 @@ def actualizar_estaciones(request):
 def tarea2(request):
     proyectos = obtenerData()
     for proyecto in proyectos:
-        
-        obj = Proyectos()
-        
+        obj, created = Proyectos.objects.get_or_create(Nombre=proyecto['Nombre'])
         obj.No = proyecto['No']
         obj.Nombre = proyecto['Nombre']
         obj.Tipo = proyecto['Tipo']
@@ -41,10 +39,12 @@ def tarea2(request):
         obj.FechaPresentacionFecha = proyecto['FechaPresentaciónFecha deIngreso(*)']
         obj.Estado = proyecto['Estado']
         obj.Mapa = proyecto['Mapa']
+    
         obj.save()
         
     proyectos=Proyectos.objects.all()
     return render(request, 'tarea2.html', {'proyectos': proyectos})
+
 
     
 def actualizar_proyectos(request):
